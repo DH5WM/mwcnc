@@ -54,7 +54,7 @@ class ps_preferences(cp1):
         m = self.types.get(type)
         try:
             o = m(self, "DEFAULT", option)
-        except Exception, detail:
+        except Exception(detail):
             print detail
             self.set("DEFAULT", option, default)
             self.write(open(self.fn, "w"))
