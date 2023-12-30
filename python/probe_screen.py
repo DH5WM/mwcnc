@@ -55,7 +55,7 @@ class ps_preferences(cp1):
         try:
             o = m(self, "DEFAULT", option)
         except Exception(detail):
-            print detail
+            print(detail)
             self.set("DEFAULT", option, default)
             self.write(open(self.fn, "w"))
             if type in(bool, float, int):
@@ -138,18 +138,18 @@ class ProbeScreenClass:
             if kind in (linuxcnc.NML_ERROR, linuxcnc.OPERATOR_ERROR):
 
                 typus = "error"
-                print typus, text
+                print(typus, text)
                 return -1
             else:
                 typus = "info"
-                print typus, text
+                print(typus, text)
                 return -1
         else:
             if "TRUE" in error_pin:
                 text = "User probe error"
                 self.add_history("Error: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
                 typus = "error"
-                print typus, text
+                print(typus, text)
                 self.command.mode( linuxcnc.MODE_MANUAL )
                 self.command.wait_complete()
                 return -1
@@ -388,7 +388,7 @@ class ProbeScreenClass:
         else:
             direction = -1
 
-        if self.distance <> 0:  # incremental jogging
+        if self.distance != 0:  # incremental jogging
             self.command.jog( linuxcnc.JOG_INCREMENT, axisnumber, direction * velocity, self.distance )
         else:  # continuous jogging
             self.command.jog( linuxcnc.JOG_CONTINUOUS, axisnumber, direction * velocity )
@@ -401,7 +401,7 @@ class ProbeScreenClass:
 
         axis = "xyzabcuvw".index( axisletter.lower() )
 
-        if self.distance <> 0:
+        if self.distance != 0:
             pass
         else:
             self.command.jog( linuxcnc.JOG_STOP, axis )
@@ -664,7 +664,7 @@ class ProbeScreenClass:
             s += " X%.4f" % x
             s += " Y%.4f" % y
         s +=  " R%.4f"%self.spbtn_offs_angle.get_value()
-        print "s=", s
+        print("s=", s)
         self.gcode(s)
         time.sleep(1)
 
@@ -1952,7 +1952,7 @@ class ProbeScreenClass:
     def on_tool_change( self, gtkbutton, data = None):
         change = self.halcomp['toolchange-change']
         toolnumber = self.halcomp['toolchange-number']
-        print "toolnumber =",toolnumber,change
+        print( "toolnumber =",toolnumber,change)
         if change:
             # if toolnumber = 0 we will get an error because we will not be able to get
             # any tooldescription, so we avoid that case
@@ -1973,7 +1973,7 @@ class ProbeScreenClass:
             if result:
                 self.halcomp["toolchange-changed"] = True
             else:
-                print"toolchange abort", self.stat.tool_in_spindle, self.halcomp['toolchange-number']
+                print( "toolchange abort", self.stat.tool_in_spindle, self.halcomp['toolchange-number'] )
                 self.command.abort()
                 self.halcomp['toolchange-number'] = self.stat.tool_in_spindle
                 self.halcomp['toolchange-change'] = False

@@ -52,7 +52,7 @@ net home-y     <=  hm2_7i76e.0.7i76.0.0.input-04
 net home-z     <=  hm2_7i76e.0.7i76.0.0.input-05
 
 # --- PROBE-IN ---
-net probe-in     <=  hm2_7i76e.0.7i76.0.0.input-06
+#net probe-in     <=  hm2_7i76e.0.7i76.0.0.input-06
 
 # --- ESTOP-EXT ---
 net estop-ext     <=  hm2_7i76e.0.7i76.0.0.input-10
@@ -304,7 +304,7 @@ net coolant-flood     <=  iocontrol.0.coolant-flood
 
 #  ---probe signal---
 
-net probe-in     =>  motion.probe-input
+#net probe-in     =>  motion.probe-input
 
 #  ---motion control signals---
 
@@ -333,4 +333,41 @@ net estop-ext     =>  iocontrol.0.emc-enable-in
 
 #  ---ignore tool prepare requests---
 #net tool-prepare-loopback   iocontrol.0.tool-prepare      =>  iocontrol.0.tool-prepared
+
+#******************************************
+# --- touch setter and or 3D probe signals ---
+#******************************************
+# --- probe signals separated for probe + toolsetter with status checking and possible bypass from macro ---
+# --- some link for securing probe are done inside spindle and orient config--
+#******************************************
+loadrt or2                    names=or2.combined-touch
+loadrt and2                   names=and2.combined-probe
+loadrt and2                   names=and2.combined-setter
+loadrt debounce               cfg=1
+addf or2.combined-touch       servo-thread
+addf and2.combined-probe      servo-thread
+addf and2.combined-setter     servo-thread
+addf debounce.0               servo-thread
+
+net touch-probe               <= hm2_7i76e.0.7i76.0.0.input-07                        # probe is NC with pullup from 5v wire
+net touch-probe               => and2.combined-probe.in0
+setp                             and2.combined-probe.in1 1                            # for correct status at startup
+net touch-probe-on-off        => and2.combined-probe.in1                              # M160 activate / M161 inhibit output from custom Mcode
+net touch-probe-and2-psng     <= and2.combined-probe.out
+net touch-probe-and2-psng     => or2.combined-touch.in0
+
+net touch-setter              <= hm2_7i76e.0.7i76.0.0.input-06                        # setter is NC NPN 24v with pullup on the mesa card
+net touch-setter              => and2.combined-setter.in0
+setp                             and2.combined-setter.in1 1                           # for correct status at startup
+net touch-setter-on-off       => and2.combined-setter.in1                             # M162 activate / M163 inhibit output from custom Mcode
+net touch-setter-and2-psng    <= and2.combined-setter.out
+net touch-setter-and2-psng    => or2.combined-touch.in1
+
+net touch-device-muxed        <= or2.combined-touch.out
+
+setp                            debounce.0.delay 4
+net touch-device-muxed       => debounce.0.0.in
+net probe-in-debounced       <= debounce.0.0.out
+net probe-in-debounced       => motion.probe-input
+#******************************************
 

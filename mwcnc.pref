@@ -1,0 +1,26 @@
+[DEFAULT]
+psng_vel_for_search = False
+psng_vel_for_probe = False
+psng_vel_for_travel = False
+psng_probe_max_xy = False
+psng_latch_probed = False
+psng_latch = False
+psng_edge_length = False
+chk_use_touch_plate = False
+abs_color = #0000FF
+rel_color = #000000
+dtg_color = #FFFF00
+homed_color = #00FF00
+unhomed_color = #FF0000
+chk_use_auto_zero_offs_xyz = False
+offs_x = 0.0
+offs_y = 0.0
+offs_z = 0.0
+chk_use_auto_zero_offs_angle = False
+offs_angle = 0.0
+chk_use_tool_measurement = False
+offs_block_height = 0.0
+offs_table_offset = 0.0
+chk_use_z_eoffset_compensation = False
+compensat_z_offs_out_of_area = 0.0
+
