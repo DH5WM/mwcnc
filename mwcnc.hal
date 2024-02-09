@@ -320,19 +320,19 @@ net estop-ext     =>  iocontrol.0.emc-enable-in
 
 #  ---manual tool change signals---
 
-#net tool-change-request    <= iocontrol.0.tool-change
-#net tool-change-confirmed  => iocontrol.0.tool-changed
-#net tool-number            <= iocontrol.0.tool-prep-number
+net tool-change-request    <= iocontrol.0.tool-change
+net tool-change-confirmed  => iocontrol.0.tool-changed
+net tool-number            <= iocontrol.0.tool-prep-number
 
 #  ---Use external manual tool change dialog---
 
-#loadusr -W hal_manualtoolchange
-#net tool-change-request    =>  hal_manualtoolchange.change
-##net tool-change-confirmed  <=  hal_manualtoolchange.changed
-#net tool-number            =>  hal_manualtoolchange.number
+loadusr -W hal_manualtoolchange
+net tool-change-request    =>  hal_manualtoolchange.change
+net tool-change-confirmed  <=  hal_manualtoolchange.changed
+net tool-number            =>  hal_manualtoolchange.number
 
 #  ---ignore tool prepare requests---
-#net tool-prepare-loopback   iocontrol.0.tool-prepare      =>  iocontrol.0.tool-prepared
+net tool-prepare-loopback   iocontrol.0.tool-prepare      =>  iocontrol.0.tool-prepared
 
 #******************************************
 # --- touch setter and or 3D probe signals ---
@@ -356,7 +356,7 @@ net touch-probe-on-off        => and2.combined-probe.in1                        
 net touch-probe-and2-psng     <= and2.combined-probe.out
 net touch-probe-and2-psng     => or2.combined-touch.in0
 
-net touch-setter              <= hm2_7i76e.0.7i76.0.0.input-06                        # setter is NC NPN 24v with pullup on the mesa card
+net touch-setter              <= hm2_7i76e.0.7i76.0.0.input-06-not                        # setter is NC NPN 24v with pullup on the mesa card
 net touch-setter              => and2.combined-setter.in0
 setp                             and2.combined-setter.in1 1                           # for correct status at startup
 net touch-setter-on-off       => and2.combined-setter.in1                             # M162 activate / M163 inhibit output from custom Mcode

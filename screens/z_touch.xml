@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pyvcp>
+    <relief>RAISED</relief>
+    <bd>3</bd>
+    <label text="Z Touch Off" />
+    <button>
+      <relief>RAISED</relief>
+      <bd>3</bd>
+      <halpin>"ztouch"</halpin>
+      <text>"Touch off"</text>
+      <font>("Helvetica",16)</font>
+    </button>
+    <relief>RAISED</relief>
+    <bd>3</bd>
+    <label text="Absaugung" />
+    <button>
+      <relief>RAISED</relief>
+      <bd>3</bd>
+      <halpin>"absaugung"</halpin>
+      <text>"Absaugung"</text>
+      <font>("Helvetica",16)</font>
+    </button>
+</pyvcp>

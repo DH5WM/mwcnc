@@ -1,18 +1,18 @@
 # Ensure all toolchange pins are free to use
-unlinkp halui.tool.diameter                      # you need to check if this pin is not used in your config file else you need to adapt
-unlinkp iocontrol.0.tool-change
-unlinkp iocontrol.0.tool-changed
-unlinkp iocontrol.0.tool-prepare
-unlinkp iocontrol.0.tool-prepared
+#unlinkp halui.tool.diameter                      # you need to check if this pin is not used in your config file else you need to adapt
+#unlinkp iocontrol.0.tool-change
+#unlinkp iocontrol.0.tool-changed
+#unlinkp iocontrol.0.tool-prepare
+#unlinkp iocontrol.0.tool-prepared
 
 
 #******************************************
 # MANUAL TOOLCHANGE with remap m6 probe using ngc from PSNG
 #******************************************
-net manual-tool-change           probe.toolchange_change      <=   iocontrol.0.tool-change
-net manual-tool-changed          probe.toolchange_changed     =>   iocontrol.0.tool-changed
-net manual-tool-prep-number      probe.toolchange_prep_number <=   iocontrol.0.tool-prep-number
-net manual-tool-prep-loop        iocontrol.0.tool-prepare     <=   iocontrol.0.tool-prepared
+#net manual-tool-change           probe.toolchange_change      <=   iocontrol.0.tool-change
+#net manual-tool-changed          probe.toolchange_changed     =>   iocontrol.0.tool-changed
+#net manual-tool-prep-number      probe.toolchange_prep_number <=   iocontrol.0.tool-prep-number
+#net manual-tool-prep-loop        iocontrol.0.tool-prepare     <=   iocontrol.0.tool-prepared
 #******************************************
 
 

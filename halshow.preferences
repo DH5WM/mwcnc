@@ -1,0 +1,27 @@
+# Halshow settings
+# This file is generated automatically.
+wm geometry . 881x475+730+102
+placeFrames 0.3
+set ::ratio 0.3
+set ::old_w_leftf 160
+set ::watchlist {
+    pin+motion.probe-input
+    pin+hm2_7i76e.0.7i76.0.0.input-06
+    pin+hm2_7i76e.0.7i76.0.0.input-07-not
+    pin+hm2_7i76e.0.7i76.0.0.input-07
+    pin+hm2_7i76e.0.watchdog.has_bit
+    param+hm2_7i76e.0.sserial.port-0.fault-dec
+    param+hm2_7i76e.0.sserial.port-0.fault-inc
+    param+hm2_7i76e.0.sserial.port-0.fault-lim
+    pin+hm2_7i76e.0.sserial.port-0.fault-count
+    pin+hm2_7i76e.0.sserial.port-0.port_state2
+    pin+hm2_7i76e.0.sserial.port-0.port_state3
+    pin+hm2_7i76e.0.sserial.port-0.run
+}
+set ::workmode watchhal
+set ::watchInterval 100
+set ::col1_width 100
+set ::ffmts 
+set ::ifmts 
+set ::alwaysOnTop 0
+set ::autoSaveWatchlist 1

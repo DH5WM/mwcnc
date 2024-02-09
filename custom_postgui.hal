@@ -1,3 +1,5 @@
 # Include your custom_postgui HAL commands here
 # This file will not be overwritten when you run PNCconf again
-net tool-prep-loop         iocontrol.0.tool-prepare      <=   iocontrol.0.tool-prepared
+#net tool-prep-loop         iocontrol.0.tool-prepare      <=   iocontrol.0.tool-prepared
+
+net ztouch halui.mdi-command-00 <= pyvcp.ztouch
