@@ -1,0 +1,49 @@
+component toggleReset "toggle with reset";
+
+
+pin in bit input;
+pin in bit rst;
+pin io bit output;
+param rw unsigned debounce = 2;
+option data toggle_data;
+
+function _ nofp;
+license "GPL";
+;;
+
+typedef struct {
+    int debounce_cntr;
+    int debounced;
+} toggle_data;
+
+FUNCTION(_) {
+
+    if (( debounce < 1 ) || ( debounce > 10000 )) {
+	/* set a sane value, we don't want 2 million second delays */
+	debounce = 2;
+    }
+    if(input && rst){
+        data.debounce_cntr++;
+        if ( data.debounce_cntr >= debounce ) {
+	        data.debounce_cntr = debounce;
+            if ( data.debounced == 0 ) {
+
+
+                output = !output;
+            }
+            data.debounced = 1;
+        }
+    } else{
+
+        if(!rst){
+            output = 0;
+        }
+        /* not pressed */
+        data.debounce_cntr--;
+        if ( data.debounce_cntr <= 0 ) {
+            data.debounce_cntr = 0;
+            data.debounced = 0;
+        }
+    }
+
+} 

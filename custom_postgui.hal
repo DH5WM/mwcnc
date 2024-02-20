@@ -3,3 +3,12 @@
 #net tool-prep-loop         iocontrol.0.tool-prepare      <=   iocontrol.0.tool-prepared
 
 net ztouch halui.mdi-command-00 <= pyvcp.ztouch
+
+
+loadrt toggleReset names=toggleSuction
+
+addf toggleSuction  servo-thread
+
+net suction.In <= pyvcp.absaugung => toggleSuction.input
+net suction.Out <= toggleSuction.output => hm2_7i76e.0.7i76.0.0.output-05
+net machine-is-enabled => toggleSuction.rst

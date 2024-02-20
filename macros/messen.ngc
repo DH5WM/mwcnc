@@ -25,10 +25,11 @@ G53 Z#1800	   	 (Sichere Z Position)
 
 G43.1 Z0	   	 (TLO reset)
 G91
-G38.2 Z-60  F500   	 (messen grob)
+G38.2 Z-100  F500   	 (messen grob)
 G1    Z1.0  F500   	 (frei fahren)	
 G38.2 Z-10  F25    	 (messen fein)
-#2000=[#5063+#5223]	 (Tastpunkt+NP Verschiebung)
+(debug,Probing result: #5063, #5223)
+#2000=[190 + #5063+#5223 ]	 (Tastpunkt+NP Verschiebung)
 #2001=[#2000-#2002+#2003](Neu - diff + alt)  
 #2002=[#2000]      	 (Tastpunkt alt merken)
 #2003=[#2001]	   	 (Offset alt merken)	 
@@ -36,6 +37,7 @@ G1 Z5.0 F500       	 (frei fahren)
 G90 G0
 
 G43.1 Z#2001       	 (TLO set)
+G10 L1 P#<_selected_tool> Z#2001
 G53 Z#1800		 (Sichere Z Position)
 G53 Z#1702	   	 (Wechsel Z Position)
 
