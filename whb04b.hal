@@ -23,29 +23,29 @@ addf and.resume servo-thread
 
 
 
-net pdnt.program.startbtn   <= hm2_7i76e.0.7i76.0.0.input-18  => and.start.in1 => and.resume.in1 
-net pdnt.program.run_or.0   <= and.start.out        => or.start.in0
-net pdnt.program.resume_or.0<= and.resume.out       => or.resume.in0
+net pdnt.program.startbtn       <= lcec.0.EK.D3_IN1.din-5       => and.start.in1 => and.resume.in1 
+net pdnt.program.run_or.0       <= and.start.out                => or.start.in0
+net pdnt.program.resume_or.0    <= and.resume.out               => or.resume.in0
 
 
 
 
-net pdnt.program.run_or.1   <= whb.halui.program.run            => or.start.in1
-net pdnt.program.run_or.out <= or.start.out                     => halui.program.run
+net pdnt.program.run_or.1       <= whb.halui.program.run        => or.start.in1
+net pdnt.program.run_or.out     <= or.start.out                 => halui.program.run
 
-net pdnt.program.resume_or.1   <= whb.halui.program.resume      => or.resume.in1
-net pdnt.program.resume_or.out <= or.resume.out                 => halui.program.resume
-
-
-
-net pdnt.program.stop_or.0   <= whb.halui.program.stop               => or.stop.in0
-net pdnt.program.stop_or.1   <= hm2_7i76e.0.7i76.0.0.input-16-not    => or.stop.in1
-net pdnt.program.stop_or.out <= or.stop.out                          => halui.program.stop
+net pdnt.program.resume_or.1    <= whb.halui.program.resume     => or.resume.in1
+net pdnt.program.resume_or.out  <= or.resume.out                => halui.program.resume
 
 
-net pdnt.program.pause_or.0   <= whb.halui.program.pause               => or.pause.in0
-net pdnt.program.pause_or.1   <= hm2_7i76e.0.7i76.0.0.input-17         => or.pause.in1
-net pdnt.program.pause_or.out <= or.pause.out                          => halui.program.pause
+
+net pdnt.program.stop_or.0      <= whb.halui.program.stop       => or.stop.in0
+net pdnt.program.stop_or.1      <= lcec.0.EK.D3_IN1.din-3-not   => or.stop.in1
+net pdnt.program.stop_or.out    <= or.stop.out                  => halui.program.stop
+
+
+net pdnt.program.pause_or.0     <= whb.halui.program.pause      => or.pause.in0
+net pdnt.program.pause_or.1     <= lcec.0.EK.D3_IN1.din-4       => or.pause.in1
+net pdnt.program.pause_or.out   <= or.pause.out                 => halui.program.pause
 
 
 
@@ -56,9 +56,9 @@ net pdnt.machine.on whb.halui.machine.on halui.machine.on
 net pdnt.machine.off whb.halui.machine.off halui.machine.off
 
 # program related signals
-net pdnt.program.is-idle whb.halui.program.is-idle halui.program.is-idle            => and.start.in0    => hm2_7i76e.0.7i76.0.0.output-10
-net pdnt.program.is-paused whb.halui.program.is-paused halui.program.is-paused      => and.resume.in0   => hm2_7i76e.0.7i76.0.0.output-09
-net pdnt.program-is-running whb.halui.program.is-running halui.program.is-running   => hm2_7i76e.0.7i76.0.0.output-08
+net pdnt.program.is-idle whb.halui.program.is-idle halui.program.is-idle            => and.start.in0    => lcec.0.EK.D5_OUT1.dout-8
+net pdnt.program.is-paused whb.halui.program.is-paused halui.program.is-paused      => and.resume.in0   => lcec.0.EK.D5_OUT1.dout-9
+net pdnt.program-is-running whb.halui.program.is-running halui.program.is-running   => lcec.0.EK.D5_OUT1.dout-10
 #net pdnt.program.resume whb.halui.program.resume halui.program.resume
 #net pdnt.program.pause whb.halui.program.pause halui.program.pause
 #net pdnt.program.run whb.halui.program.run halui.program.run

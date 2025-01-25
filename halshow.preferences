@@ -1,22 +1,24 @@
 # Halshow settings
 # This file is generated automatically.
-wm geometry . 881x475+763+105
+wm geometry . 1085x551+568+130
 placeFrames 0.3
 set ::ratio 0.3
 set ::old_w_leftf 160
 set ::watchlist {
-    pin+motion.probe-input
-    pin+hm2_7i76e.0.7i76.0.0.input-06
-    pin+hm2_7i76e.0.7i76.0.0.input-07-not
-    pin+hm2_7i76e.0.7i76.0.0.input-07
-    pin+hm2_7i76e.0.watchdog.has_bit
-    param+hm2_7i76e.0.sserial.port-0.fault-dec
-    param+hm2_7i76e.0.sserial.port-0.fault-inc
-    param+hm2_7i76e.0.sserial.port-0.fault-lim
-    pin+hm2_7i76e.0.sserial.port-0.fault-count
-    pin+hm2_7i76e.0.sserial.port-0.port_state2
-    pin+hm2_7i76e.0.sserial.port-0.port_state3
-    pin+hm2_7i76e.0.sserial.port-0.run
+    pin+joint.0.motor-pos-cmd
+    pin+joint.0.motor-pos-fb
+    pin+lcec.0.X.srv-pos-cmd
+    pin+joint.1.motor-pos-cmd
+    pin+joint.1.motor-pos-fb
+    pin+lcec.0.Y.srv-pos-cmd
+    pin+lcec.0.Y.srv-enable
+    pin+lcec.0.Y.srv-switch-on
+    pin+lcec.0.Y.srv-operation-mode
+    pin+lcec.0.Y.srv-oper-enabled
+    param+lcec.0.Y.pos-scale
+    param+lcec.0.Y.srv-fault-autoreset-cycles
+    param+lcec.0.Y.srv-fault-autoreset-retries
+    param+lcec.0.Y.srv-pulses-per-rev
 }
 set ::workmode watchhal
 set ::watchInterval 100

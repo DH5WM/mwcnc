@@ -20,4 +20,44 @@
       <text>"Absaugung"</text>
       <font>("Helvetica",16)</font>
     </button>
+    <relief>RAISED</relief>
+    <bd>3</bd>
+    <label text="Vakuum" />
+    <button>
+      <relief>RAISED</relief>
+      <bd>3</bd>
+      <halpin>"vacuum"</halpin>
+      <text>"Vakuum"</text>
+      <font>("Helvetica",16)</font>
+    </button>
+    <relief>RAISED</relief>
+    <bd>3</bd>
+    <label text="3D Sensor" />
+    <button>
+      <relief>RAISED</relief>
+      <bd>3</bd>
+      <halpin>"finder"</halpin>
+      <text>"3D Sensor"</text>
+      <font>("Helvetica",16)</font>
+    </button>
+
+    <relief>RAISED</relief>
+    <bd>3</bd>
+    <label text="Amplifier status" />
+  <hbox>
+    <led>
+      <halpin>"amp-fault"</halpin>
+      <size>50</size>
+      <on_color>"red"</on_color>
+      <off_color>"green"</off_color>
+    </led>
+    <button>
+      <relief>RAISED</relief>
+      <bd>3</bd>
+      <halpin>"rst-amp-flt"</halpin>
+      <text>"Clear Fault"</text>
+      <font>("Helvetica",16)</font>
+    </button>
+
+</hbox>
 </pyvcp>

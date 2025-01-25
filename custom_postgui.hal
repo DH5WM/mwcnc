@@ -5,10 +5,24 @@
 net ztouch halui.mdi-command-00 <= pyvcp.ztouch
 
 
-loadrt toggleReset names=toggleSuction
+loadrt toggleReset names=toggleSuction,toggleVacuum,toggleFinder
 
 addf toggleSuction  servo-thread
+addf toggleVacuum  servo-thread
+addf toggleFinder  servo-thread
 
 net suction.In <= pyvcp.absaugung => toggleSuction.input
-net suction.Out <= toggleSuction.output => hm2_7i76e.0.7i76.0.0.output-05
+net suction.Out <= toggleSuction.output => lcec.0.EK.D5_OUT1.dout-6
 net machine-is-enabled => toggleSuction.rst
+
+net vacuum.In <= pyvcp.vacuum => toggleVacuum.input
+net vacuum.Out <= toggleVacuum.output => lcec.0.EK.D5_OUT1.dout-5
+net machine-is-enabled => toggleVacuum.rst
+
+net finder.In <= pyvcp.finder => toggleFinder.input
+net finder.Out <= toggleFinder.output => lcec.0.EK.D5_OUT1.dout-4
+net machine-is-enabled => toggleFinder.rst
+
+
+net has-flt <= reset-logic.or => pyvcp.amp-fault
+net reset-flt <= pyvcp.rst-amp-flt => lcec.0.X.srv-fault-reset lcec.0.Y.srv-fault-reset lcec.0.Z.srv-fault-reset

@@ -1,11 +1,11 @@
 [DEFAULT]
-psng_vel_for_search = False
-psng_vel_for_probe = False
-psng_vel_for_travel = False
-psng_probe_max_xy = False
-psng_latch_probed = False
-psng_latch = False
-psng_edge_length = False
+psng_vel_for_search = 100.0
+psng_vel_for_probe = 2.000000000000001
+psng_vel_for_travel = 200.0
+psng_probe_max_xy = 10.0
+psng_latch_probed = 0.9999999999999999
+psng_latch = 2.000000000000001
+psng_edge_length = 10.0
 chk_use_touch_plate = False
 abs_color = #0000FF
 rel_color = #000000
