@@ -2,7 +2,7 @@
 # This file will not be overwritten when you run PNCconf again
 #net tool-prep-loop         iocontrol.0.tool-prepare      <=   iocontrol.0.tool-prepared
 
-net ztouch halui.mdi-command-00 <= pyvcp.ztouch
+net ztouch halui.mdi-command-27 <= pyvcp.ztouch
 
 
 loadrt toggleReset names=toggleSuction,toggleVacuum,toggleFinder

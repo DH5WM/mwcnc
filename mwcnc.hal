@@ -56,14 +56,14 @@ net estop-ext     <=  lcec.0.EK.D3_IN1.din-15
 
 # ---closedloop stepper signals---
 
-setp lcec.0.X.srv-pulses-per-rev 16777216
-setp lcec.0.X.pos-scale 2
+setp lcec.0.X.srv-pulses-per-rev 4194304 #4194304 # 16777216/4 e-gear 4.00
+setp lcec.0.X.pos-scale 3.125 # 40/64 Z 5mm pitch e-gear 2.00
 
 net x-pos-cmd    <= joint.0.motor-pos-cmd
 net x-pos-cmd    => lcec.0.X.srv-pos-cmd
 net x-vel-cmd    <= joint.0.vel-cmd
 net x-pos-fb     => joint.0.motor-pos-fb
-net x-pos-fb     <= lcec.0.X.enc-pos
+net x-pos-fb     <= lcec.0.X.enc-pos-abs
 net x-enable     <= joint.0.amp-enable-out
 net x-enable     => lcec.0.X.srv-enable
 net x-enable     => lcec.0.X.srv-switch-on
@@ -82,14 +82,14 @@ net x-pos-limit     =>  joint.0.pos-lim-sw-in
 
 # ---closedloop stepper signals---
 
-setp lcec.0.Y.srv-pulses-per-rev 16777216
+setp lcec.0.Y.srv-pulses-per-rev 4194304 # 16777216/4 e-gear 4.00
 setp lcec.0.Y.pos-scale 3.2
 
 net y-pos-cmd    <= joint.1.motor-pos-cmd
 net y-pos-cmd    => lcec.0.Y.srv-pos-cmd
 net y-vel-cmd    <= joint.1.vel-cmd
 net y-pos-fb     => joint.1.motor-pos-fb
-net y-pos-fb     <= lcec.0.Y.enc-pos
+net y-pos-fb     <= lcec.0.Y.enc-pos-abs
 net y-enable     <= joint.1.amp-enable-out
 net y-enable     => lcec.0.Y.srv-enable
 net y-enable     => lcec.0.Y.srv-switch-on
@@ -114,7 +114,7 @@ net z-pos-cmd    <= joint.2.motor-pos-cmd
 net z-pos-cmd    => lcec.0.Z.srv-pos-cmd
 net z-vel-cmd    <= joint.2.vel-cmd
 net z-pos-fb     => joint.2.motor-pos-fb
-net z-pos-fb     <= lcec.0.Z.enc-pos
+net z-pos-fb     <= lcec.0.Z.enc-pos-abs
 net z-enable     <= joint.2.amp-enable-out
 net z-enable     => lcec.0.Z.srv-enable
 net z-enable     => lcec.0.Z.srv-switch-on
@@ -254,33 +254,12 @@ net tool-prepare-loopback   iocontrol.0.tool-prepare      =>  iocontrol.0.tool-p
 # --- some link for securing probe are done inside spindle and orient config--
 #******************************************
 loadrt or2                    names=or2.combined-touch
-loadrt and2                   names=and2.combined-probe
-loadrt and2                   names=and2.combined-setter
-loadrt debounce               cfg=1
 addf or2.combined-touch       servo-thread
-addf and2.combined-probe      servo-thread
-addf and2.combined-setter     servo-thread
-addf debounce.0               servo-thread
 
-net touch-probe               <= lcec.0.EK.D3_IN1.din-6-not     # probe is NC highside 24V
-net touch-probe               => and2.combined-probe.in0
-setp                             and2.combined-probe.in1 1      # for correct status at startup
-net touch-probe-on-off        => and2.combined-probe.in1        # M160 activate / M161 inhibit output from custom Mcode
-net touch-probe-and2-psng     <= and2.combined-probe.out
-net touch-probe-and2-psng     => or2.combined-touch.in0
+net touch-probe               <= lcec.0.EK.D3_IN1.din-6-not => or2.combined-touch.in0     # probe is NC highside 24V
 
-net touch-setter              <= lcec.0.EK.D3_IN1.din-7-not     # setter is NC highside 24V 
-net touch-setter              => and2.combined-setter.in0
-setp                             and2.combined-setter.in1 1     # for correct status at startup
-net touch-setter-on-off       => and2.combined-setter.in1       # M162 activate / M163 inhibit output from custom Mcode
-net touch-setter-and2-psng    <= and2.combined-setter.out
-net touch-setter-and2-psng    => or2.combined-touch.in1
+net touch-setter              <= lcec.0.EK.D3_IN1.din-7 => or2.combined-touch.in1   # setter is NC highside 24V 
 
-net touch-device-muxed        <= or2.combined-touch.out
 
-setp                            debounce.0.delay 4
-net touch-device-muxed       => debounce.0.0.in
-net probe-in-debounced       <= debounce.0.0.out
-net probe-in-debounced       => motion.probe-input
 #******************************************
 
